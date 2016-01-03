@@ -24,10 +24,14 @@ public class AlbumsAdapter extends BaseListAdapter<Album> {
     public View getView(int i, View view, ViewGroup viewGroup) {
         Album album = getTypedItem(i);
 
-        view = LayoutInflater.from(context).inflate(R.layout.listitem_text, viewGroup, false);
+        view = LayoutInflater.from(context).inflate(R.layout.listitem_album, viewGroup, false);
 
-        TextView valueField = (TextView) view.findViewById(R.id.value);
-        valueField.setText(album.getName());
+        // TODO set cover
+        TextView artistView = (TextView) view.findViewById(R.id.artist);
+        TextView albumView = (TextView) view.findViewById(R.id.album);
+
+        artistView.setText(album.getArtist().getName());
+        albumView.setText(album.getName());
 
         return view;
     }

@@ -18,6 +18,7 @@
     <style name="MyTheme.Widget.Text" parent="MyTheme">
         <item name="android:textColor">@color/colorPrimaryText</item>
         <item name="android:textSize">@dimen/textMedium</item>
+        <item name="android:gravity">center_vertical</item>
     </style>
 
     <style name="MyTheme.Widget.Text.Large">
@@ -64,7 +65,19 @@
         <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
     </style>
 
-    <style name="MyTheme.Widget.ListItem"></style>
+    <style name="MyTheme.Widget.ListItem">
+        <item name="android:paddingTop">@dimen/listPaddingTop</item>
+        <item name="android:paddingBottom">@dimen/listPaddingBottom</item>
+        <item name="android:gravity">center_vertical</item>
+        <item name="android:layout_gravity">center_vertical</item>
+    </style>
+
+    <style name="MyTheme.Widget.ListItem.Text" parent="MyTheme.Widget.Text.Medium"></style>
+
+    <style name="MyTheme.Widget.ListItem.Image">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_marginRight">@dimen/listImagePaddingRight</item>
+    </style>
 
     <style name="MyTheme.Toolbar">
         <item name="android:background">@color/colorPrimary</item>

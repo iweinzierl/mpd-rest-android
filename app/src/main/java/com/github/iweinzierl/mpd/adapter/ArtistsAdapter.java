@@ -24,7 +24,7 @@ public class ArtistsAdapter extends BaseListAdapter<Artist> {
     public View getView(int i, View view, ViewGroup viewGroup) {
         Artist artist = getTypedItem(i);
 
-        view = LayoutInflater.from(context).inflate(R.layout.listitem_text, viewGroup, false);
+        view = LayoutInflater.from(context).inflate(R.layout.listitem_artist, viewGroup, false);
 
         TextView valueField = (TextView) view.findViewById(R.id.value);
         valueField.setText(artist.getName());
