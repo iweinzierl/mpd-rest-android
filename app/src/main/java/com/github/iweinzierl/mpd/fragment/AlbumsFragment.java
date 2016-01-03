@@ -10,31 +10,31 @@ import android.widget.AdapterView;
 import android.widget.ListView;
 
 import com.github.iweinzierl.mpd.R;
-import com.github.iweinzierl.mpd.adapter.ArtistsAdapter;
-import com.github.iweinzierl.mpd.domain.Artist;
+import com.github.iweinzierl.mpd.adapter.AlbumsAdapter;
+import com.github.iweinzierl.mpd.domain.Album;
 
 import java.util.Collections;
 import java.util.List;
 
-public class ArtistsFragment extends Fragment {
+public class AlbumsFragment extends Fragment {
 
     public interface Callback {
-        void onArtistClicked(Artist artist);
+        void onAlbumClicked(Album artist);
     }
 
     private Callback callback;
 
-    private ArtistsAdapter artistsAdapter;
+    private AlbumsAdapter albumsAdapter;
 
     @Override
     public View onCreateView(LayoutInflater inflater, ViewGroup container, Bundle savedInstanceState) {
         View view = inflater.inflate(R.layout.fragment_artists, container, false);
 
-        artistsAdapter = new ArtistsAdapter(getActivity());
+        albumsAdapter = new AlbumsAdapter(getActivity());
 
-        final ListView artistsList = (ListView) view.findViewById(R.id.list);
-        artistsList.setAdapter(artistsAdapter);
-        artistsList.setOnItemClickListener(new ArticleClickListener());
+        final ListView albumsList = (ListView) view.findViewById(R.id.list);
+        albumsList.setAdapter(albumsAdapter);
+        albumsList.setOnItemClickListener(new AlbumClickListener());
 
         return view;
     }
@@ -49,20 +49,20 @@ public class ArtistsFragment extends Fragment {
     }
 
     @SuppressWarnings("unchecked")
-    public void setArtists(List<Artist> artists) {
-        if (artists == null) {
-            artistsAdapter.setItems(Collections.EMPTY_LIST);
+    public void setAlbums(List<Album> albums) {
+        if (albums == null) {
+            albumsAdapter.setItems(Collections.EMPTY_LIST);
         } else {
-            artistsAdapter.setItems(artists);
+            albumsAdapter.setItems(albums);
         }
     }
 
-    private class ArticleClickListener implements AdapterView.OnItemClickListener {
+    private class AlbumClickListener implements AdapterView.OnItemClickListener {
         @Override
         public void onItemClick(AdapterView<?> adapterView, View view, int i, long l) {
             if (callback != null) {
-                Artist artist = artistsAdapter.getTypedItem(i);
-                callback.onArtistClicked(artist);
+                Album album = albumsAdapter.getTypedItem(i);
+                callback.onAlbumClicked(album);
             }
         }
     }
