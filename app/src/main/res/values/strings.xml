@@ -13,6 +13,8 @@
 
     <string name="player_notification_play_successful">Started Player</string>
     <string name="player_notification_play_failed">Unable to start Player</string>
+    <string name="player_notification_pause_successful">Paused Player</string>
+    <string name="player_notification_pause_failed">Unable to pause Player</string>
     <string name="player_notification_next_successful">Successfully jumped to next song</string>
     <string name="player_notification_next_failed">Unable to jump to next song</string>
     <string name="player_notification_previous_successful">Successfully jumped to previous song</string>

@@ -18,6 +18,7 @@ public class PlayerControlTask extends AsyncTask<PlayerControlTask.Command, Void
 
     public enum Command {
         PLAY,
+        PAUSE,
         NEXT,
         PREVIOUS,
         STOP
@@ -44,6 +45,9 @@ public class PlayerControlTask extends AsyncTask<PlayerControlTask.Command, Void
         switch (command[0]) {
             case PLAY:
                 call = proxyClient.play();
+                break;
+            case PAUSE:
+                call = proxyClient.pause();
                 break;
             case NEXT:
                 call = proxyClient.playNext();

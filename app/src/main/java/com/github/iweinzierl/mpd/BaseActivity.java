@@ -1,5 +1,6 @@
 package com.github.iweinzierl.mpd;
 
+import android.content.Intent;
 import android.content.pm.PackageManager;
 import android.os.Bundle;
 import android.support.v4.view.GestureDetectorCompat;
@@ -124,12 +125,18 @@ public abstract class BaseActivity extends AppCompatActivity {
         int item = NavigationAdapter.navigationItems[pos - 1];
 
         switch (item) {
-            // TODO
+            case R.string.nav_player:
+                startActivity(new Intent(this, PlayerActivity.class));
+                break;
+            case R.string.nav_library:
+                startActivity(new Intent(this, ArtistsActivity.class));
+                break;
         }
     }
 
     protected Player getPlayer() {
-        return new Player(this);
+        MpdProxyApplication application = (MpdProxyApplication) getApplication();
+        return application.getPlayer();
     }
 
     protected abstract int getLayoutId();

@@ -136,4 +136,14 @@
         <item name="android:textSize">@dimen/textMedium</item>
     </style>
 
+    <style name="MyTheme.PlayerControl">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="MyTheme.PlayerControl.Image">
+        <item name="android:layout_width">48dp</item>
+        <item name="android:layout_height">48dp</item>
+    </style>
+
 </resources>

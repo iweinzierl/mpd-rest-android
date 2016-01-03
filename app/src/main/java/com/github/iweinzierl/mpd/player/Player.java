@@ -6,12 +6,30 @@ import android.widget.Toast;
 import com.github.iweinzierl.mpd.R;
 import com.github.iweinzierl.mpd.async.PlayerControlTask;
 
+import java.util.HashSet;
+import java.util.Set;
+
 public class Player {
+
+    public interface PlayerListener {
+        void onPlayerPaused();
+
+        void onPlayerStarted();
+
+        void onPlayerStopped();
+
+        void onJumpedToPreviousSong();
+
+        void onJumpedToNextSong();
+    }
 
     private final Context context;
 
+    private final Set<PlayerListener> playerListeners;
+
     public Player(Context context) {
         this.context = context;
+        playerListeners = new HashSet<>();
     }
 
     public void play() {
@@ -20,8 +38,20 @@ public class Player {
             protected void onPostExecute(Status status) {
                 super.onPostExecute(status);
                 showNotification(getPlayNotification(status));
+                notifyPlayerStarted();
             }
         }.execute(PlayerControlTask.Command.PLAY);
+    }
+
+    public void pause() {
+        new PlayerControlTask(context) {
+            @Override
+            protected void onPostExecute(Status status) {
+                super.onPostExecute(status);
+                showNotification(getPauseNotification(status));
+                notifyPlayerPaused();
+            }
+        }.execute(PlayerControlTask.Command.PAUSE);
     }
 
     public void next() {
@@ -30,6 +60,7 @@ public class Player {
             protected void onPostExecute(Status status) {
                 super.onPostExecute(status);
                 showNotification(getNextNotification(status));
+                notifyJumpedToNextSong();
             }
         }.execute(PlayerControlTask.Command.NEXT);
     }
@@ -40,6 +71,7 @@ public class Player {
             protected void onPostExecute(Status status) {
                 super.onPostExecute(status);
                 showNotification(getPreviousNotification(status));
+                notifyJumpedToPreviousSong();
             }
         }.execute(PlayerControlTask.Command.PREVIOUS);
     }
@@ -50,8 +82,43 @@ public class Player {
             protected void onPostExecute(Status status) {
                 super.onPostExecute(status);
                 showNotification(getStopNotification(status));
+                notifyPlayerStopped();
             }
         }.execute(PlayerControlTask.Command.STOP);
+    }
+
+    public void addPlayerListener(PlayerListener playerListener) {
+        playerListeners.add(playerListener);
+    }
+
+    private void notifyPlayerStarted() {
+        for (PlayerListener playerListener : playerListeners) {
+            playerListener.onPlayerStarted();
+        }
+    }
+
+    private void notifyPlayerPaused() {
+        for (PlayerListener playerListener : playerListeners) {
+            playerListener.onPlayerPaused();
+        }
+    }
+
+    private void notifyJumpedToPreviousSong() {
+        for (PlayerListener playerListener : playerListeners) {
+            playerListener.onJumpedToPreviousSong();
+        }
+    }
+
+    private void notifyJumpedToNextSong() {
+        for (PlayerListener playerListener : playerListeners) {
+            playerListener.onJumpedToNextSong();
+        }
+    }
+
+    private void notifyPlayerStopped() {
+        for (PlayerListener playerListener : playerListeners) {
+            playerListener.onPlayerStopped();
+        }
     }
 
     private void showNotification(String message) {
@@ -66,6 +133,14 @@ public class Player {
             return context.getString(R.string.player_notification_play_successful);
         } else {
             return context.getString(R.string.player_notification_play_failed);
+        }
+    }
+
+    private String getPauseNotification(PlayerControlTask.Status status) {
+        if (status == PlayerControlTask.Status.OK) {
+            return context.getString(R.string.player_notification_pause_successful);
+        } else {
+            return context.getString(R.string.player_notification_pause_failed);
         }
     }
 

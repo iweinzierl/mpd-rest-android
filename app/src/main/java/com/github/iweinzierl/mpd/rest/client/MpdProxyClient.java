@@ -2,6 +2,7 @@ package com.github.iweinzierl.mpd.rest.client;
 
 import com.github.iweinzierl.mpd.domain.Album;
 import com.github.iweinzierl.mpd.domain.Artist;
+import com.github.iweinzierl.mpd.domain.PlayerInfo;
 import com.github.iweinzierl.mpd.domain.Playlist;
 import com.github.iweinzierl.mpd.domain.Song;
 
@@ -17,8 +18,14 @@ import retrofit.http.Query;
 
 public interface MpdProxyClient {
 
+    @GET("/api/player")
+    Call<PlayerInfo> getPlayerInfo();
+
     @GET("/api/player/play")
     Call<Void> play();
+
+    @GET("/api/player/pause")
+    Call<Void> pause();
 
     @GET("/api/player/next")
     Call<Void> playNext();
