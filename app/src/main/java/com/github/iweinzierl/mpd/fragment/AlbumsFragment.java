@@ -4,10 +4,13 @@ import android.content.Context;
 import android.os.Bundle;
 import android.support.v4.app.Fragment;
 import android.view.LayoutInflater;
+import android.view.MenuInflater;
+import android.view.MenuItem;
 import android.view.View;
 import android.view.ViewGroup;
 import android.widget.AdapterView;
 import android.widget.ListView;
+import android.widget.PopupMenu;
 
 import com.github.iweinzierl.mpd.R;
 import com.github.iweinzierl.mpd.adapter.AlbumsAdapter;
@@ -19,7 +22,9 @@ import java.util.List;
 public class AlbumsFragment extends Fragment {
 
     public interface Callback {
-        void onAlbumClicked(Album artist);
+        void onAlbumClicked(Album album);
+
+        void onAddReplacePlay(Album album);
     }
 
     private Callback callback;
@@ -35,6 +40,7 @@ public class AlbumsFragment extends Fragment {
         final ListView albumsList = (ListView) view.findViewById(R.id.list);
         albumsList.setAdapter(albumsAdapter);
         albumsList.setOnItemClickListener(new AlbumClickListener());
+        albumsList.setOnItemLongClickListener(new AlbumLongClickListener());
 
         return view;
     }
@@ -63,6 +69,39 @@ public class AlbumsFragment extends Fragment {
             if (callback != null) {
                 Album album = albumsAdapter.getTypedItem(i);
                 callback.onAlbumClicked(album);
+            }
+        }
+    }
+
+    private class AlbumLongClickListener implements AdapterView.OnItemLongClickListener {
+        @Override
+        public boolean onItemLongClick(AdapterView<?> adapterView, View view, int i, long l) {
+            final Album album = albumsAdapter.getTypedItem(i);
+            PopupMenu popup = new PopupMenu(getActivity(), view);
+            popup.setOnMenuItemClickListener(new PopupMenu.OnMenuItemClickListener() {
+                @Override
+                public boolean onMenuItemClick(MenuItem menuItem) {
+                    switch (menuItem.getItemId()) {
+                        case R.id.add_and_replace:
+                            addAndReplace(album);
+                            return true;
+                        default:
+                            return false;
+                    }
+                }
+            });
+
+            MenuInflater inflater = popup.getMenuInflater();
+            inflater.inflate(R.menu.menu_popup_album, popup.getMenu());
+
+            popup.show();
+
+            return true;
+        }
+
+        private void addAndReplace(Album album) {
+            if (callback != null) {
+                callback.onAddReplacePlay(album);
             }
         }
     }

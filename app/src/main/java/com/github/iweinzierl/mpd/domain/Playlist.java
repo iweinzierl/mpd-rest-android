@@ -4,6 +4,8 @@ import java.util.Collection;
 
 public class Playlist {
 
+    public static final String CURRENT = "CURRENT";
+
     private String name;
 
     private Collection<Song> songs;

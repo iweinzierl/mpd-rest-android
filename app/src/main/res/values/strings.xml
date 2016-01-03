@@ -8,4 +8,17 @@
     <string name="artists_progress_load_artists">Loading Artists…</string>
 
     <string name="albums_progress_load_albums">Loading Albums…</string>
+    <string name="albums_progress_add_replace_play">Clear Playlist, Add to Playlist, Play</string>
+    <string name="albums_notification_add_replace_play_successful">Added album to playlist: %s</string>
+
+    <string name="player_notification_play_successful">Started Player</string>
+    <string name="player_notification_play_failed">Unable to start Player</string>
+    <string name="player_notification_next_successful">Successfully jumped to next song</string>
+    <string name="player_notification_next_failed">Unable to jump to next song</string>
+    <string name="player_notification_previous_successful">Successfully jumped to previous song</string>
+    <string name="player_notification_previous_failed">Unable to jump to previous song</string>
+    <string name="player_notification_stop_successful">Stopped Player</string>
+    <string name="player_notification_stop_failed">Unable to stop Player</string>
+
+    <string name="menu_popup_add_and_replace">Playlist: Add and Replace</string>
 </resources>

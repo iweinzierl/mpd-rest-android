@@ -17,6 +17,7 @@ import android.widget.TextView;
 
 import com.github.iweinzierl.android.logging.AndroidLoggerFactory;
 import com.github.iweinzierl.mpd.navigation.NavigationAdapter;
+import com.github.iweinzierl.mpd.player.Player;
 
 import org.slf4j.Logger;
 
@@ -100,6 +101,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         progressOverlay.setVisibility(View.GONE);
     }
 
+    protected boolean isProgress() {
+        return progressOverlay.getVisibility() == View.VISIBLE;
+    }
+
     private String getVersionName() {
         PackageManager packageManager = getPackageManager();
         try {
@@ -121,6 +126,10 @@ public abstract class BaseActivity extends AppCompatActivity {
         switch (item) {
             // TODO
         }
+    }
+
+    protected Player getPlayer() {
+        return new Player(this);
     }
 
     protected abstract int getLayoutId();
