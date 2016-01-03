@@ -1,11 +1,139 @@
 <resources>
 
-    <!-- Base application theme. -->
-    <style name="AppTheme" parent="Theme.AppCompat.Light.DarkActionBar">
-        <!-- Customize your theme here. -->
-        <item name="colorPrimary">@color/colorPrimary</item>
-        <item name="colorPrimaryDark">@color/colorPrimaryDark</item>
-        <item name="colorAccent">@color/colorAccent</item>
+    <style name="MyTheme" parent="Theme.AppCompat.NoActionBar">
+        <item name="android:colorPrimary">@color/colorPrimary</item>
+        <item name="android:colorPrimaryDark">@color/colorPrimaryDark</item>
+        <item name="android:colorAccent">@color/colorAccent</item>
+        <item name="android:windowBackground">@color/colorWindowBackground</item>
+    </style>
+
+    <style name="MyTheme.Widget.Button" parent="Widget.AppCompat.Button">
+        <item name="android:background">@drawable/ripple_primary</item>
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyTheme.Widget"></style>
+
+    <style name="MyTheme.Widget.Text" parent="MyTheme">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/textMedium</item>
+    </style>
+
+    <style name="MyTheme.Widget.Text.Large">
+        <item name="android:textSize">@dimen/textLarge</item>
+    </style>
+
+    <style name="MyTheme.Widget.Text.Medium">
+        <item name="android:textSize">@dimen/textMedium</item>
+    </style>
+
+    <style name="MyTheme.Widget.Text.Small">
+        <item name="android:textSize">@dimen/textSmall</item>
+    </style>
+
+    <style name="MyTheme.Widget.Text.Tiny">
+        <item name="android:textSize">@dimen/textTiny</item>
+    </style>
+
+    <style name="MyTheme.Widget.EditText" parent="Widget.AppCompat.EditText">
+        <item name="android:textColor">@color/colorPrimaryText</item>
+        <item name="android:textSize">@dimen/textMedium</item>
+    </style>
+
+    <style name="MyTheme.Widget.EditText.Large">
+        <item name="android:textSize">@dimen/textLarge</item>
+    </style>
+
+    <style name="MyTheme.Widget.EditText.Medium">
+        <item name="android:textSize">@dimen/textMedium</item>
+    </style>
+
+    <style name="MyTheme.Widget.EditText.Small">
+        <item name="android:textSize">@dimen/textSmall</item>
+    </style>
+
+    <style name="MyTheme.Widget.EditText.Tiny">
+        <item name="android:textSize">@dimen/textTiny</item>
+    </style>
+
+    <style name="MyTheme.Widget.Image"></style>
+
+    <style name="MyTheme.Widget.List">
+        <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingRight">@dimen/activity_horizontal_margin</item>
+    </style>
+
+    <style name="MyTheme.Widget.ListItem"></style>
+
+    <style name="MyTheme.Toolbar">
+        <item name="android:background">@color/colorPrimary</item>
+        <item name="android:layout_width">match_parent</item>
+        <item name="android:layout_height">56dp</item>
+        <item name="android:textSize">@dimen/textMedium</item>
+    </style>
+
+    <style name="MyTheme.Navigation">
+        <item name="android:background">@color/colorPrimaryLight</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Header">
+        <item name="android:background">@color/colorPrimary</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Header.Icon">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">wrap_content</item>
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">8dp</item>
+        <item name="android:gravity">left|center_vertical</item>
+        <item name="android:layout_gravity">left|center_vertical</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Header.Text" parent="MyTheme.Widget.Text">
+        <item name="android:paddingLeft">5dp</item>
+        <item name="android:textSize">@dimen/textTiny</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Header.Text.Title">
+        <item name="android:textSize">@dimen/textLarge</item>
+        <item name="android:textStyle">bold</item>
+        <item name="android:layout_gravity">center_vertical</item>
+        <item name="android:gravity">center_vertical</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Header.User">
+        <item name="android:paddingLeft">24dp</item>
+        <item name="android:paddingBottom">10dp</item>
+        <item name="android:drawablePadding">10dp</item>
+        <item name="android:textSize">@dimen/textTiny</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Item">
+        <item name="android:background">@drawable/ripple_primary_light</item>
+        <item name="android:paddingTop">16dp</item>
+        <item name="android:paddingBottom">16dp</item>
+        <item name="android:paddingLeft">10dp</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Item.Text" parent="MyTheme.Widget.Text">
+        <item name="android:textSize">@dimen/textMedium</item>
+        <item name="android:textStyle">bold</item>
+    </style>
+
+    <style name="MyTheme.Navigation.Item.Image" parent="MyTheme.Widget.Image">
+        <item name="android:paddingLeft">16dp</item>
+        <item name="android:paddingRight">16dp</item>
+    </style>
+
+    <style name="MyTheme.Progress">
+        <item name="android:background">@color/colorWindowBackground</item>
+    </style>
+
+    <style name="MyTheme.Progress.Text" parent="MyTheme.Widget.Text">
+        <item name="android:textSize">@dimen/textMedium</item>
     </style>
 
 </resources>

@@ -2,5 +2,15 @@
 <resources>
     <color name="colorPrimary">#3F51B5</color>
     <color name="colorPrimaryDark">#303F9F</color>
-    <color name="colorAccent">#FF4081</color>
+    <color name="colorPrimaryLight">#5563b6</color>
+
+    <color name="colorAccent">#009688</color>
+
+    <color name="colorPrimaryText">#fff</color>
+    <color name="colorSecondaryText">#939393</color>
+
+    <color name="colorWindowBackground">#262424</color>
+
+    <color name="divider">#B6B6B6</color>
 </resources>
+
