@@ -3,6 +3,7 @@ package com.github.iweinzierl.mpd.rest;
 import android.content.Context;
 
 import com.github.iweinzierl.mpd.rest.client.MpdProxyClient;
+import com.github.iweinzierl.mpd.rest.json.AnnotationExclusionStrategy;
 import com.google.gson.Gson;
 import com.google.gson.GsonBuilder;
 import com.google.gson.JsonArray;
@@ -39,10 +40,24 @@ public class ClientFactory {
                 .create(MpdProxyClient.class);
     }
 
+    public static MpdProxyClient createSyncClient(Context context) {
+        OkHttpClient client = new OkHttpClient();
+        client.setConnectTimeout(10, TimeUnit.SECONDS);
+        client.setReadTimeout(120, TimeUnit.SECONDS);
+        client.interceptors().add(createLoggingInterceptor());
+
+        return new Retrofit.Builder()
+                .baseUrl(BASE_URL_MPD_PROXY)
+                .client(client)
+                .addConverterFactory(GsonConverterFactory.create(createGson()))
+                .build()
+                .create(MpdProxyClient.class);
+    }
+
     private static OkHttpClient createClient() {
         OkHttpClient client = new OkHttpClient();
-        client.setConnectTimeout(10000, TimeUnit.MILLISECONDS);
-        client.setReadTimeout(30000, TimeUnit.MILLISECONDS);
+        client.setConnectTimeout(10, TimeUnit.SECONDS);
+        client.setReadTimeout(30, TimeUnit.SECONDS);
         client.interceptors().add(createLoggingInterceptor());
 
         return client;
@@ -77,6 +92,7 @@ public class ClientFactory {
                         );
                     }
                 })
+                .setExclusionStrategies(new AnnotationExclusionStrategy())
                 .create();
     }
 }

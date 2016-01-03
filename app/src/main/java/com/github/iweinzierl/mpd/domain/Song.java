@@ -1,6 +1,14 @@
 package com.github.iweinzierl.mpd.domain;
 
+import com.github.iweinzierl.mpd.rest.json.Exclude;
+import com.orm.dsl.Table;
+
+@Table
 public class Song {
+
+    @Exclude
+    private Long id;
+
     private String title;
     private String file;
 
@@ -15,8 +23,14 @@ public class Song {
 
     private int length;
     private int track;
-    private int position = -1;
-    private int id = -1;
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public Long getId() {
+        return id;
+    }
 
     public String getTitle() {
         return title;
@@ -96,21 +110,5 @@ public class Song {
 
     public void setTrack(int track) {
         this.track = track;
-    }
-
-    public int getPosition() {
-        return position;
-    }
-
-    public void setPosition(int position) {
-        this.position = position;
-    }
-
-    public int getId() {
-        return id;
-    }
-
-    public void setId(int id) {
-        this.id = id;
     }
 }

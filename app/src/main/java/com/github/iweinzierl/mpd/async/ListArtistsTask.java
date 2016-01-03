@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import com.github.iweinzierl.android.logging.AndroidLoggerFactory;
 import com.github.iweinzierl.mpd.domain.Artist;
+import com.github.iweinzierl.mpd.domain.repository.Repository;
 import com.github.iweinzierl.mpd.rest.ClientFactory;
 import com.github.iweinzierl.mpd.rest.client.MpdProxyClient;
 
@@ -28,16 +29,22 @@ public class ListArtistsTask extends AsyncTask<Void, Void, List<Artist>> {
 
     @Override
     protected List<Artist> doInBackground(Void... voids) {
-        MpdProxyClient proxyClient = ClientFactory.createMpdProxyClient(context);
-        Call<List<Artist>> call = proxyClient.listArtists();
+        Repository repository = new Repository(context);
 
-        try {
-            Response<List<Artist>> response = call.execute();
-            return response.body();
-        } catch (IOException e) {
-            LOG.error("Unable to fetch artists", e);
+        if (repository.isCacheEnabled()) {
+            return repository.listArtists();
+        } else {
+            MpdProxyClient proxyClient = ClientFactory.createMpdProxyClient(context);
+            Call<List<Artist>> call = proxyClient.listArtists();
+
+            try {
+                Response<List<Artist>> response = call.execute();
+                return response.body();
+            } catch (IOException e) {
+                LOG.error("Unable to fetch artists", e);
+            }
+
+            return null;
         }
-
-        return null;
     }
 }

@@ -52,6 +52,10 @@ public interface MpdProxyClient {
     @GET("/api/album/{album}")
     Call<List<Song>> listSongs(@Path("album") String album);
 
+    @Headers({"Accept: application/json"})
+    @GET("/api/song")
+    Call<List<Song>> listSongs();
+
     @Headers({"Accept: application/json", "Content-Type: application/json"})
     @POST("/api/playlist")
     Call<Playlist> savePlaylist(@Body Playlist playlist);

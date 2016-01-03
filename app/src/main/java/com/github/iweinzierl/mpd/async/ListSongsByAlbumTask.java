@@ -5,6 +5,7 @@ import android.os.AsyncTask;
 
 import com.github.iweinzierl.android.logging.AndroidLoggerFactory;
 import com.github.iweinzierl.mpd.domain.Song;
+import com.github.iweinzierl.mpd.domain.repository.Repository;
 import com.github.iweinzierl.mpd.rest.ClientFactory;
 import com.github.iweinzierl.mpd.rest.client.MpdProxyClient;
 
@@ -28,16 +29,22 @@ public class ListSongsByAlbumTask extends AsyncTask<String, Void, List<Song>> {
 
     @Override
     protected List<Song> doInBackground(String... albums) {
-        MpdProxyClient proxyClient = ClientFactory.createMpdProxyClient(context);
-        Call<List<Song>> call = proxyClient.listSongs(albums[0]);
+        Repository repository = new Repository(context);
 
-        try {
-            Response<List<Song>> response = call.execute();
-            return response.body();
-        } catch (IOException e) {
-            LOG.error("Unable to fetch songs by album: {}", albums[0], e);
+        if (repository.isCacheEnabled()) {
+            return repository.findSongs(albums[0]);
+        } else {
+            MpdProxyClient proxyClient = ClientFactory.createMpdProxyClient(context);
+            Call<List<Song>> call = proxyClient.listSongs(albums[0]);
+
+            try {
+                Response<List<Song>> response = call.execute();
+                return response.body();
+            } catch (IOException e) {
+                LOG.error("Unable to fetch songs by album: {}", albums[0], e);
+            }
+
+            return null;
         }
-
-        return null;
     }
 }

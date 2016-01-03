@@ -1,10 +1,12 @@
 package com.github.iweinzierl.mpd;
 
-import android.app.Application;
-
+import com.github.iweinzierl.mpd.helper.LibrarySyncProcess;
 import com.github.iweinzierl.mpd.player.Player;
+import com.orm.SugarApp;
 
-public class MpdProxyApplication extends Application {
+public class MpdProxyApplication extends SugarApp {
+
+    public static final String PREFS_APP = "com.github.iweinzierl.mpd.MpdProxyApplication.PREFERENCES";
 
     private Player player;
 
@@ -13,6 +15,11 @@ public class MpdProxyApplication extends Application {
         super.onCreate();
 
         player = new Player(this);
+
+        LibrarySyncProcess syncProcess = new LibrarySyncProcess(this);
+        if (syncProcess.isSyncRequired()) {
+            syncProcess.sync();
+        }
     }
 
     public Player getPlayer() {
