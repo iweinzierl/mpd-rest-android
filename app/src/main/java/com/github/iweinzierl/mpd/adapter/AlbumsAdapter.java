@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.github.iweinzierl.mpd.R;
 import com.github.iweinzierl.mpd.domain.Album;
+import com.github.iweinzierl.mpd.helper.AlbumComparator;
 
 import java.util.Collections;
 
@@ -16,7 +17,7 @@ public class AlbumsAdapter extends BaseListAdapter<Album> {
 
     @SuppressWarnings("unchecked")
     public AlbumsAdapter(Context context) {
-        super(context, Collections.EMPTY_LIST);
+        super(context, Collections.EMPTY_LIST, new AlbumComparator());
     }
 
     @Override

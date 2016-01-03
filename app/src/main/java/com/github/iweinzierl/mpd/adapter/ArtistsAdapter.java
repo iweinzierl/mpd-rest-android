@@ -8,6 +8,7 @@ import android.widget.TextView;
 
 import com.github.iweinzierl.mpd.R;
 import com.github.iweinzierl.mpd.domain.Artist;
+import com.github.iweinzierl.mpd.helper.ArtistComparator;
 
 import java.util.Collections;
 
@@ -16,7 +17,7 @@ public class ArtistsAdapter extends BaseListAdapter<Artist> {
 
     @SuppressWarnings("unchecked")
     public ArtistsAdapter(Context context) {
-        super(context, Collections.EMPTY_LIST);
+        super(context, Collections.EMPTY_LIST, new ArtistComparator());
     }
 
     @Override
