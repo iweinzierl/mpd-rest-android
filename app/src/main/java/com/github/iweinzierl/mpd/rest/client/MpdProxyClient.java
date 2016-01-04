@@ -36,6 +36,9 @@ public interface MpdProxyClient {
     @GET("/api/player/stop")
     Call<Void> stop();
 
+    @GET("/api/player/volume")
+    Call<Void> setVolume(@Query("volume") int volume);
+
     @Headers({"Accept: application/json"})
     @GET("/api/artist")
     Call<List<Artist>> listArtists();

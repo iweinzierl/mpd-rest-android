@@ -9,6 +9,8 @@ public class PlayerInfo {
 
     private PlayerStatus status;
 
+    private int volume;
+
     public Long getId() {
         return id;
     }
@@ -23,5 +25,13 @@ public class PlayerInfo {
 
     public void setStatus(PlayerStatus status) {
         this.status = status;
+    }
+
+    public int getVolume() {
+        return volume;
+    }
+
+    public void setVolume(int volume) {
+        this.volume = volume;
     }
 }

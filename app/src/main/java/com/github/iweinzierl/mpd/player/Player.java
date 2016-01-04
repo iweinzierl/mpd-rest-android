@@ -5,6 +5,7 @@ import android.widget.Toast;
 
 import com.github.iweinzierl.mpd.R;
 import com.github.iweinzierl.mpd.async.PlayerControlTask;
+import com.github.iweinzierl.mpd.async.PlayerVolumeControlTask;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -21,6 +22,8 @@ public class Player {
         void onJumpedToPreviousSong();
 
         void onJumpedToNextSong();
+
+        void onVolumeChanged(int volume);
     }
 
     private final Context context;
@@ -87,6 +90,21 @@ public class Player {
         }.execute(PlayerControlTask.Command.STOP);
     }
 
+    public void setVolume(final int volume) {
+        if (volume < 0 || volume > 100) {
+            throw new IllegalArgumentException("Volume must be >= 0 and <= 100");
+        }
+
+        new PlayerVolumeControlTask(context) {
+            @Override
+            protected void onPostExecute(Status status) {
+                super.onPostExecute(status);
+                showNotification(getVolumeChangedNotification(status));
+                notifyVolumeChanged(volume);
+            }
+        }.execute(volume);
+    }
+
     public void addPlayerListener(PlayerListener playerListener) {
         playerListeners.add(playerListener);
     }
@@ -118,6 +136,12 @@ public class Player {
     private void notifyPlayerStopped() {
         for (PlayerListener playerListener : playerListeners) {
             playerListener.onPlayerStopped();
+        }
+    }
+
+    private void notifyVolumeChanged(int volume) {
+        for (PlayerListener playerListener : playerListeners) {
+            playerListener.onVolumeChanged(volume);
         }
     }
 
@@ -165,6 +189,15 @@ public class Player {
             return context.getString(R.string.player_notification_stop_successful);
         } else {
             return context.getString(R.string.player_notification_stop_failed);
+        }
+    }
+
+    private String getVolumeChangedNotification(PlayerVolumeControlTask.Status status) {
+        if (status == PlayerVolumeControlTask.Status.OK) {
+            return context.getString(R.string.player_notification_volume_change_successful);
+        } else {
+            return context.getString(R.string.player_notification_volume_change_failed);
+
         }
     }
 }

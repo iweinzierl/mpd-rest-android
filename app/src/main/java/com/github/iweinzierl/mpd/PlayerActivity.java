@@ -66,6 +66,11 @@ public class PlayerActivity extends BaseActivity implements PlayerControlsFragme
         getPlayer().next();
     }
 
+    @Override
+    public void onChangeVolume(int volume) {
+        getPlayer().setVolume(volume);
+    }
+
     private void setPlayerInfo(PlayerInfo playerInfo) {
         this.playerInfo = playerInfo;
         playerControlsFragment.setPlayerInfo(playerInfo);
@@ -95,5 +100,9 @@ public class PlayerActivity extends BaseActivity implements PlayerControlsFragme
 
     @Override
     public void onJumpedToNextSong() {
+    }
+
+    @Override
+    public void onVolumeChanged(int volume) {
     }
 }

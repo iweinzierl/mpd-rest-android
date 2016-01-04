@@ -58,7 +58,9 @@
         <item name="android:textSize">@dimen/textTiny</item>
     </style>
 
-    <style name="MyTheme.Widget.Image"></style>
+    <style name="MyTheme.Widget.Image">
+        <item name="android:background">@color/colorWindowBackground</item>
+    </style>
 
     <style name="MyTheme.Widget.List">
         <item name="android:paddingLeft">@dimen/activity_horizontal_margin</item>
@@ -151,12 +153,36 @@
 
     <style name="MyTheme.PlayerControl">
         <item name="android:gravity">center</item>
-        <item name="android:layout_gravity">center</item>
+        <item name="android:layout_gravity">center_horizontal|bottom</item>
+        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
     </style>
 
-    <style name="MyTheme.PlayerControl.Image">
-        <item name="android:layout_width">48dp</item>
-        <item name="android:layout_height">48dp</item>
+    <style name="MyTheme.PlayerControl.Section">
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center_horizontal|bottom</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">0dp</item>
+        <item name="android:layout_marginRight">0dp</item>
+    </style>
+
+    <style name="MyTheme.PlayerControl.Image" parent="MyTheme.Widget.Image">
+        <item name="android:layout_width">64dp</item>
+        <item name="android:layout_height">64dp</item>
+        <item name="android:scaleType">fitXY</item>
+    </style>
+
+    <style name="MyTheme.PlayerControl.VolumeBar">
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:gravity">center</item>
+        <item name="android:layout_gravity">center</item>
     </style>
 
 </resources>

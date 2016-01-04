@@ -1,28 +1,52 @@
 <?xml version="1.0" encoding="utf-8"?>
-<LinearLayout xmlns:android="http://schemas.android.com/apk/res/android"
+<RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/MyTheme.PlayerControl"
-    android:layout_width="wrap_content"
-    android:layout_height="match_parent"
-    android:orientation="horizontal">
+    android:layout_width="match_parent"
+    android:layout_height="wrap_content">
 
-    <ImageButton
-        android:id="@+id/previous"
-        style="@style/MyTheme.PlayerControl.Image"
-        android:src="@drawable/ic_skip_previous_white_48dp" />
+    <LinearLayout
+        android:id="@+id/control_wrapper"
+        style="@style/MyTheme.PlayerControl.Section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:orientation="horizontal">
 
-    <ImageButton
-        android:id="@+id/play"
-        style="@style/MyTheme.PlayerControl.Image"
-        android:src="@drawable/ic_play_arrow_white_48dp" />
+        <ImageButton
+            android:id="@+id/previous"
+            style="@style/MyTheme.PlayerControl.Image"
+            android:src="@drawable/ic_skip_previous_white_48dp" />
 
-    <ImageButton
-        android:id="@+id/pause"
-        style="@style/MyTheme.PlayerControl.Image"
-        android:src="@drawable/ic_pause_white_48dp" />
+        <ImageButton
+            android:id="@+id/play"
+            style="@style/MyTheme.PlayerControl.Image"
+            android:src="@drawable/ic_play_arrow_white_48dp" />
 
-    <ImageButton
-        android:id="@+id/next"
-        style="@style/MyTheme.PlayerControl.Image"
-        android:src="@drawable/ic_skip_next_white_48dp" />
+        <ImageButton
+            android:id="@+id/pause"
+            style="@style/MyTheme.PlayerControl.Image"
+            android:src="@drawable/ic_pause_white_48dp" />
 
-</LinearLayout>
+        <ImageButton
+            android:id="@+id/next"
+            style="@style/MyTheme.PlayerControl.Image"
+            android:src="@drawable/ic_skip_next_white_48dp" />
+
+    </LinearLayout>
+
+    <LinearLayout
+        android:id="@+id/volume_wrapper"
+        style="@style/MyTheme.PlayerControl.Section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/control_wrapper"
+        android:orientation="horizontal">
+
+        <android.support.v7.widget.AppCompatSeekBar
+            android:id="@+id/volume_bar"
+            style="@style/MyTheme.PlayerControl.VolumeBar"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:max="100" />
+
+    </LinearLayout>
+</RelativeLayout>
