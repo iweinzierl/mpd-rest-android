@@ -84,7 +84,7 @@
     <style name="MyTheme.Toolbar">
         <item name="android:background">@color/colorPrimary</item>
         <item name="android:layout_width">match_parent</item>
-        <item name="android:layout_height">56dp</item>
+        <item name="android:layout_height">@dimen/toolbarHeight</item>
         <item name="android:textSize">@dimen/textMedium</item>
     </style>
 
@@ -154,10 +154,12 @@
     <style name="MyTheme.PlayerControl">
         <item name="android:gravity">center</item>
         <item name="android:layout_gravity">center_horizontal|bottom</item>
-        <item name="android:layout_marginTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginTop">@dimen/toolbarHeight</item>
         <item name="android:layout_marginBottom">@dimen/activity_vertical_margin</item>
+        <!--
         <item name="android:layout_marginLeft">@dimen/activity_horizontal_margin</item>
         <item name="android:layout_marginRight">@dimen/activity_horizontal_margin</item>
+        -->
     </style>
 
     <style name="MyTheme.PlayerControl.Section">
@@ -185,4 +187,68 @@
         <item name="android:layout_gravity">center</item>
     </style>
 
+    <style name="MyTheme.PlayerControl.Text" parent="MyTheme.Widget.Text.Medium"></style>
+
+    <style name="MyTheme.PlayerControl.Text.Song">
+        <item name="android:textStyle">bold</item>
+        <item name="android:paddingTop">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginBottom">@dimen/listItemBottomMargin</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="MyTheme.PlayerControl.Text.Artist">
+        <item name="android:textSize">@dimen/textSmall</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:layout_marginBottom">@dimen/listItemBottomMargin</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="MyTheme.PlayerControl.Text.Album">
+        <item name="android:textSize">@dimen/textSmall</item>
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:layout_marginBottom">@dimen/listItemBottomMargin</item>
+        <item name="android:gravity">center_horizontal</item>
+    </style>
+
+    <style name="MyTheme.PlayerControl.Text.Time">
+        <item name="android:textColor">@color/colorAccent</item>
+    </style>
+
+    <style name="MyTheme.SongList" parent="MyTheme.Widget.List">
+        <item name="android:background">@color/colorWindowBackgroundLight</item>
+        <item name="android:paddingLeft">@dimen/activity_vertical_margin</item>
+        <item name="android:paddingRight">@dimen/activity_vertical_margin</item>
+        <item name="android:layout_marginTop">@dimen/activity_horizontal_margin</item>
+        <item name="android:layout_marginBottom">125dp</item>
+    </style>
+
+    <style name="MyTheme.SongList.Duration">
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+        <item name="android:layout_gravity">center</item>
+    </style>
+
+    <style name="MyTheme.SongList.Song">
+        <item name="android:textStyle">bold</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">5dp</item>
+    </style>
+
+    <style name="MyTheme.SongList.Artist">
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+        <item name="android:layout_marginRight">8dp</item>
+    </style>
+
+    <style name="MyTheme.SongList.Album">
+        <item name="android:textColor">@color/colorSecondaryText</item>
+        <item name="android:background">@android:color/transparent</item>
+        <item name="android:layout_marginTop">0dp</item>
+        <item name="android:layout_marginBottom">0dp</item>
+    </style>
 </resources>

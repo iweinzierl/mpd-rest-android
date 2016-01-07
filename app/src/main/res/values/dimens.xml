@@ -3,6 +3,8 @@
     <dimen name="activity_horizontal_margin">16dp</dimen>
     <dimen name="activity_vertical_margin">16dp</dimen>
 
+    <dimen name="toolbarHeight">56dp</dimen>
+
     <dimen name="textLarge">20dp</dimen>
     <dimen name="textMedium">18dp</dimen>
     <dimen name="textSmall">16dp</dimen>
@@ -11,4 +13,5 @@
     <dimen name="listPaddingTop">8dp</dimen>
     <dimen name="listPaddingBottom">8dp</dimen>
     <dimen name="listImagePaddingRight">16dp</dimen>
+    <dimen name="listItemBottomMargin">5dp</dimen>
 </resources>

@@ -10,6 +10,7 @@
     <color name="colorSecondaryText">#939393</color>
 
     <color name="colorWindowBackground">#262424</color>
+    <color name="colorWindowBackgroundLight">#353232</color>
 
     <color name="divider">#B6B6B6</color>
 </resources>

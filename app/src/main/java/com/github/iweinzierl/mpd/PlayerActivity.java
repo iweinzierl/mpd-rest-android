@@ -32,13 +32,7 @@ public class PlayerActivity extends BaseActivity implements PlayerControlsFragme
 
         getPlayer().addPlayerListener(this);
 
-        new GetPlayerInfoTask(this) {
-            @Override
-            protected void onPostExecute(PlayerInfo playerInfo) {
-                super.onPostExecute(playerInfo);
-                setPlayerInfo(playerInfo);
-            }
-        }.execute();
+        updatePlayerInfo();
     }
 
     @Override
@@ -78,31 +72,62 @@ public class PlayerActivity extends BaseActivity implements PlayerControlsFragme
 
     @Override
     public void onPlayerPaused() {
-        playerInfo.setStatus(PlayerStatus.PAUSED);
-        playerControlsFragment.setPlayerInfo(playerInfo);
+        if (playerInfo == null) {
+            updatePlayerInfo();
+        } else {
+            playerInfo.setStatus(PlayerStatus.PAUSED);
+            playerControlsFragment.setPlayerInfo(playerInfo);
+        }
     }
 
     @Override
     public void onPlayerStarted() {
-        playerInfo.setStatus(PlayerStatus.PLAYING);
-        playerControlsFragment.setPlayerInfo(playerInfo);
+        if (playerInfo == null) {
+            updatePlayerInfo();
+        } else {
+            playerInfo.setStatus(PlayerStatus.PLAYING);
+            playerControlsFragment.setPlayerInfo(playerInfo);
+        }
     }
 
     @Override
     public void onPlayerStopped() {
-        playerInfo.setStatus(PlayerStatus.STOPPED);
-        playerControlsFragment.setPlayerInfo(playerInfo);
+        if (playerInfo == null) {
+            updatePlayerInfo();
+        } else {
+            playerInfo.setStatus(PlayerStatus.STOPPED);
+            playerControlsFragment.setPlayerInfo(playerInfo);
+        }
     }
 
     @Override
     public void onJumpedToPreviousSong() {
+        if (playerInfo == null) {
+            updatePlayerInfo();
+        }
     }
 
     @Override
     public void onJumpedToNextSong() {
+        if (playerInfo == null) {
+            updatePlayerInfo();
+        }
     }
 
     @Override
     public void onVolumeChanged(int volume) {
+    }
+
+    private void updatePlayerInfo() {
+        startProgress(getString(R.string.player_progress_update_info));
+
+        new GetPlayerInfoTask(this) {
+            @Override
+            protected void onPostExecute(PlayerInfo playerInfo) {
+                super.onPostExecute(playerInfo);
+                stopProgress();
+                setPlayerInfo(playerInfo);
+            }
+        }.execute();
     }
 }

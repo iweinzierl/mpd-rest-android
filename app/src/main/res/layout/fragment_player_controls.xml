@@ -2,51 +2,125 @@
 <RelativeLayout xmlns:android="http://schemas.android.com/apk/res/android"
     style="@style/MyTheme.PlayerControl"
     android:layout_width="match_parent"
-    android:layout_height="wrap_content">
+    android:layout_height="match_parent">
 
-    <LinearLayout
-        android:id="@+id/control_wrapper"
-        style="@style/MyTheme.PlayerControl.Section"
+    <RelativeLayout
+        android:id="@+id/current_song_wrapper"
         android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:orientation="horizontal">
+        android:layout_height="wrap_content">
 
-        <ImageButton
-            android:id="@+id/previous"
-            style="@style/MyTheme.PlayerControl.Image"
-            android:src="@drawable/ic_skip_previous_white_48dp" />
+        <TextView
+            android:id="@+id/song"
+            style="@style/MyTheme.PlayerControl.Text.Song"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content" />
 
-        <ImageButton
-            android:id="@+id/play"
-            style="@style/MyTheme.PlayerControl.Image"
-            android:src="@drawable/ic_play_arrow_white_48dp" />
-
-        <ImageButton
-            android:id="@+id/pause"
-            style="@style/MyTheme.PlayerControl.Image"
-            android:src="@drawable/ic_pause_white_48dp" />
-
-        <ImageButton
-            android:id="@+id/next"
-            style="@style/MyTheme.PlayerControl.Image"
-            android:src="@drawable/ic_skip_next_white_48dp" />
-
-    </LinearLayout>
-
-    <LinearLayout
-        android:id="@+id/volume_wrapper"
-        style="@style/MyTheme.PlayerControl.Section"
-        android:layout_width="match_parent"
-        android:layout_height="wrap_content"
-        android:layout_below="@id/control_wrapper"
-        android:orientation="horizontal">
-
-        <android.support.v7.widget.AppCompatSeekBar
-            android:id="@+id/volume_bar"
-            style="@style/MyTheme.PlayerControl.VolumeBar"
+        <TextView
+            android:id="@+id/artist"
+            style="@style/MyTheme.PlayerControl.Text.Album"
             android:layout_width="match_parent"
             android:layout_height="wrap_content"
-            android:max="100" />
+            android:layout_below="@id/song" />
 
-    </LinearLayout>
+        <TextView
+            android:id="@+id/album"
+            style="@style/MyTheme.PlayerControl.Text.Album"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/artist" />
+
+    </RelativeLayout>
+
+    <RelativeLayout
+        android:id="@+id/time_wrapper"
+        style="@style/MyTheme.PlayerControl.Section"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/current_song_wrapper">
+
+        <TextView
+            android:id="@+id/elapsed_time"
+            style="@style/MyTheme.PlayerControl.Text.Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content" />
+
+        <TextView
+            android:id="@+id/time_separator"
+            style="@style/MyTheme.PlayerControl.Text.Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/elapsed_time"
+            android:paddingLeft="10dp"
+            android:paddingRight="10dp"
+            android:text="/"
+            android:visibility="gone" />
+
+        <TextView
+            android:id="@+id/total_time"
+            style="@style/MyTheme.PlayerControl.Text.Time"
+            android:layout_width="wrap_content"
+            android:layout_height="wrap_content"
+            android:layout_toEndOf="@id/time_separator" />
+
+    </RelativeLayout>
+
+    <ListView
+        android:id="@+id/playlist"
+        style="@style/MyTheme.SongList"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_below="@id/time_wrapper" />
+
+    <RelativeLayout
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:layout_alignParentBottom="true">
+
+        <LinearLayout
+            android:id="@+id/control_wrapper"
+            style="@style/MyTheme.PlayerControl.Section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:orientation="horizontal">
+
+            <ImageButton
+                android:id="@+id/previous"
+                style="@style/MyTheme.PlayerControl.Image"
+                android:src="@drawable/ic_skip_previous_white_48dp" />
+
+            <ImageButton
+                android:id="@+id/play"
+                style="@style/MyTheme.PlayerControl.Image"
+                android:src="@drawable/ic_play_arrow_white_48dp" />
+
+            <ImageButton
+                android:id="@+id/pause"
+                style="@style/MyTheme.PlayerControl.Image"
+                android:src="@drawable/ic_pause_white_48dp" />
+
+            <ImageButton
+                android:id="@+id/next"
+                style="@style/MyTheme.PlayerControl.Image"
+                android:src="@drawable/ic_skip_next_white_48dp" />
+
+        </LinearLayout>
+
+        <LinearLayout
+            android:id="@+id/volume_wrapper"
+            style="@style/MyTheme.PlayerControl.Section"
+            android:layout_width="match_parent"
+            android:layout_height="wrap_content"
+            android:layout_below="@id/control_wrapper"
+            android:orientation="horizontal">
+
+            <android.support.v7.widget.AppCompatSeekBar
+                android:id="@+id/volume_bar"
+                style="@style/MyTheme.PlayerControl.VolumeBar"
+                android:layout_width="match_parent"
+                android:layout_height="wrap_content"
+                android:max="100" />
+
+        </LinearLayout>
+
+    </RelativeLayout>
 </RelativeLayout>
