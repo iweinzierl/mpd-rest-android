@@ -14,6 +14,8 @@
     <string name="player_progress_update_info">Load current player status</string>
     <string name="player_notification_play_successful">Started player</string>
     <string name="player_notification_play_failed">Unable to start player</string>
+    <string name="player_notification_play_song_successful">Started player with: %s</string>
+    <string name="player_notification_play_song_failed">Unable to start player with: %s</string>
     <string name="player_notification_pause_successful">Paused player</string>
     <string name="player_notification_pause_failed">Unable to pause player</string>
     <string name="player_notification_next_successful">Successfully jumped to next song</string>

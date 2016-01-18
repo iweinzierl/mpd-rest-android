@@ -5,7 +5,9 @@ import android.widget.Toast;
 
 import com.github.iweinzierl.mpd.R;
 import com.github.iweinzierl.mpd.async.PlayerControlTask;
+import com.github.iweinzierl.mpd.async.PlayerPlaySongTask;
 import com.github.iweinzierl.mpd.async.PlayerVolumeControlTask;
+import com.github.iweinzierl.mpd.domain.Song;
 
 import java.util.HashSet;
 import java.util.Set;
@@ -22,6 +24,8 @@ public class Player {
         void onJumpedToPreviousSong();
 
         void onJumpedToNextSong();
+
+        void onSongChanged(Song song);
 
         void onVolumeChanged(int volume);
     }
@@ -44,6 +48,20 @@ public class Player {
                 notifyPlayerStarted();
             }
         }.execute(PlayerControlTask.Command.PLAY);
+    }
+
+    public void play(final Song song) {
+        new PlayerPlaySongTask(context) {
+            @Override
+            protected void onPostExecute(Status status) {
+                super.onPostExecute(status);
+                showNotification(getPlaySongNotification(status, song));
+
+                if (status == Status.OK) {
+                    notifySongChanged(song);
+                }
+            }
+        }.execute(song);
     }
 
     public void pause() {
@@ -115,6 +133,12 @@ public class Player {
         }
     }
 
+    private void notifySongChanged(Song song) {
+        for (PlayerListener playerListener : playerListeners) {
+            playerListener.onSongChanged(song);
+        }
+    }
+
     private void notifyPlayerPaused() {
         for (PlayerListener playerListener : playerListeners) {
             playerListener.onPlayerPaused();
@@ -157,6 +181,14 @@ public class Player {
             return context.getString(R.string.player_notification_play_successful);
         } else {
             return context.getString(R.string.player_notification_play_failed);
+        }
+    }
+
+    private String getPlaySongNotification(PlayerPlaySongTask.Status status, Song song) {
+        if (status == PlayerPlaySongTask.Status.OK) {
+            return context.getString(R.string.player_notification_play_song_successful, song.getTitle());
+        } else {
+            return context.getString(R.string.player_notification_play_song_failed);
         }
     }
 

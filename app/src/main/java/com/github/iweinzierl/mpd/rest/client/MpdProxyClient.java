@@ -24,6 +24,9 @@ public interface MpdProxyClient {
     @GET("/api/player/play")
     Call<Void> play();
 
+    @POST("/api/player/play")
+    Call<Void> play(@Body Song song);
+
     @GET("/api/player/pause")
     Call<Void> pause();
 

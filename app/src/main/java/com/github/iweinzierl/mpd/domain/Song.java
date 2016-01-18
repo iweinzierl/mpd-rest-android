@@ -1,6 +1,7 @@
 package com.github.iweinzierl.mpd.domain;
 
 import com.github.iweinzierl.mpd.rest.json.Exclude;
+import com.google.gson.annotations.SerializedName;
 import com.orm.dsl.Table;
 
 @Table
@@ -8,6 +9,9 @@ public class Song {
 
     @Exclude
     private Long id;
+
+    @SerializedName("id")
+    private int mpdId;
 
     private String title;
     private String file;
@@ -30,6 +34,14 @@ public class Song {
 
     public Long getId() {
         return id;
+    }
+
+    public int getMpdId() {
+        return mpdId;
+    }
+
+    public void setMpdId(int mpdId) {
+        this.mpdId = mpdId;
     }
 
     public String getTitle() {

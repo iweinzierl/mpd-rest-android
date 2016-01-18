@@ -5,6 +5,7 @@ import android.os.Bundle;
 import com.github.iweinzierl.mpd.async.GetPlayerInfoTask;
 import com.github.iweinzierl.mpd.domain.PlayerInfo;
 import com.github.iweinzierl.mpd.domain.PlayerStatus;
+import com.github.iweinzierl.mpd.domain.Song;
 import com.github.iweinzierl.mpd.fragment.PlayerControlsFragment;
 import com.github.iweinzierl.mpd.player.Player;
 
@@ -61,6 +62,11 @@ public class PlayerActivity extends BaseActivity implements PlayerControlsFragme
     }
 
     @Override
+    public void onClickedSong(Song song) {
+        getPlayer().play(song);
+    }
+
+    @Override
     public void onChangeVolume(int volume) {
         getPlayer().setVolume(volume);
     }
@@ -76,6 +82,7 @@ public class PlayerActivity extends BaseActivity implements PlayerControlsFragme
             updatePlayerInfo();
         } else {
             playerInfo.setStatus(PlayerStatus.PAUSED);
+            playerInfo.setElapsedTime(playerControlsFragment.getElapsedTime());
             playerControlsFragment.setPlayerInfo(playerInfo);
         }
     }
@@ -111,6 +118,19 @@ public class PlayerActivity extends BaseActivity implements PlayerControlsFragme
     public void onJumpedToNextSong() {
         if (playerInfo == null) {
             updatePlayerInfo();
+        }
+    }
+
+    @Override
+    public void onSongChanged(Song song) {
+        if (playerInfo == null) {
+            updatePlayerInfo();
+        } else {
+            playerInfo.setStatus(PlayerStatus.PLAYING);
+            playerInfo.setCurrentSong(song);
+            playerInfo.setElapsedTime(0);
+            playerInfo.setTotalTime(song.getLength());
+            playerControlsFragment.setPlayerInfo(playerInfo);
         }
     }
 

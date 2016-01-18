@@ -9,6 +9,7 @@ import android.support.v7.widget.AppCompatSeekBar;
 import android.view.LayoutInflater;
 import android.view.View;
 import android.view.ViewGroup;
+import android.widget.AdapterView;
 import android.widget.ListView;
 import android.widget.SeekBar;
 import android.widget.TextView;
@@ -18,6 +19,7 @@ import com.github.iweinzierl.mpd.R;
 import com.github.iweinzierl.mpd.adapter.SongsAdapter;
 import com.github.iweinzierl.mpd.domain.PlayerInfo;
 import com.github.iweinzierl.mpd.domain.PlayerStatus;
+import com.github.iweinzierl.mpd.domain.Song;
 
 import org.slf4j.Logger;
 
@@ -34,6 +36,8 @@ public class PlayerControlsFragment extends Fragment implements SeekBar.OnSeekBa
         void onStartPlayer();
 
         void onNextSong();
+
+        void onClickedSong(Song song);
 
         void onChangeVolume(int volume);
     }
@@ -77,8 +81,18 @@ public class PlayerControlsFragment extends Fragment implements SeekBar.OnSeekBa
         volumeBar = (AppCompatSeekBar) view.findViewById(R.id.volume_bar);
         View previous = view.findViewById(R.id.previous);
         View next = view.findViewById(R.id.next);
+
         ListView playlist = (ListView) view.findViewById(R.id.playlist);
         playlist.setAdapter(songAdapter);
+        playlist.setOnItemClickListener(new AdapterView.OnItemClickListener() {
+            @Override
+            public void onItemClick(AdapterView<?> parent, View view, int position, long id) {
+                if (callback != null) {
+                    Song song = songAdapter.getTypedItem(position);
+                    callback.onClickedSong(song);
+                }
+            }
+        });
 
         previous.setOnClickListener(new View.OnClickListener() {
             @Override
@@ -142,7 +156,13 @@ public class PlayerControlsFragment extends Fragment implements SeekBar.OnSeekBa
     public void onStopTrackingTouch(SeekBar seekBar) {
     }
 
+    public long getElapsedTime() {
+        return elapsedTime;
+    }
+
     public void setPlayerInfo(PlayerInfo playerInfo) {
+        stopRuntimeClock();
+
         applyPlayPauseButton(playerInfo);
         applyVolume(playerInfo);
         applySongInformation(playerInfo);
@@ -236,7 +256,9 @@ public class PlayerControlsFragment extends Fragment implements SeekBar.OnSeekBa
     }
 
     private void stopRuntimeClock() {
-        updateTimesTimer.cancel();
+        if (updateTimesTimer != null) {
+            updateTimesTimer.cancel();
+        }
     }
 
     private class UpdateElapsedTimeHandler extends Handler {
