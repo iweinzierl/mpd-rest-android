@@ -188,7 +188,7 @@ public class Player {
         if (status == PlayerPlaySongTask.Status.OK) {
             return context.getString(R.string.player_notification_play_song_successful, song.getTitle());
         } else {
-            return context.getString(R.string.player_notification_play_song_failed);
+            return context.getString(R.string.player_notification_play_song_failed, song.getTitle());
         }
     }
 
