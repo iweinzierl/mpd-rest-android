@@ -27,8 +27,8 @@ import retrofit.Retrofit;
 
 public class ClientFactory {
 
-    private static final String BASE_URL_MPD_PROXY = "http://10.0.2.2:6622";
-    //private static final String BASE_URL_MPD_PROXY = "http://192.168.192.112:6622";
+    //private static final String BASE_URL_MPD_PROXY = "http://10.0.2.2:6622";
+    private static final String BASE_URL_MPD_PROXY = "http://192.168.192.112:6622";
 
     public static MpdProxyClient createMpdProxyClient(Context context) {
         OkHttpClient client = createClient();

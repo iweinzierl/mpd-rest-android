@@ -28,6 +28,12 @@ import retrofit.Response;
 
 public class LibrarySyncProcess {
 
+    public interface SyncCallback {
+        void onSyncSucceeded();
+
+        void onSyncFailed();
+    }
+
     private static class SyncException extends Exception {
         public SyncException(String detailMessage) {
             super(detailMessage);
@@ -84,9 +90,15 @@ public class LibrarySyncProcess {
 
 
     private final Context context;
+    private final SyncCallback callback;
 
     public LibrarySyncProcess(Context context) {
+        this(context, null);
+    }
+
+    public LibrarySyncProcess(Context context, SyncCallback callback) {
         this.context = context;
+        this.callback = callback;
     }
 
     public boolean isSyncRequired() {
@@ -108,6 +120,10 @@ public class LibrarySyncProcess {
                     doSync(syncStatistic);
                 } catch (IOException | SyncException e) {
                     LOG.error("Sync failed", e);
+
+                    if (callback != null) {
+                        callback.onSyncFailed();
+                    }
                 }
 
                 return null;
@@ -122,6 +138,10 @@ public class LibrarySyncProcess {
                 LOG.debug("  -> synced songs:   {}", syncStatistic.syncedSongs);
 
                 setSyncDate();
+
+                if (callback != null) {
+                    callback.onSyncSucceeded();
+                }
             }
         }.execute();
     }

@@ -1,0 +1,11 @@
+<?xml version="1.0" encoding="utf-8"?>
+<menu xmlns:android="http://schemas.android.com/apk/res/android"
+    xmlns:tools="http://schemas.android.com/apk/res-auto">
+
+    <item
+        android:id="@+id/sync"
+        android:icon="@drawable/ic_sync_white_36dp"
+        android:title="@string/menu_activity_artists_sync_library"
+        tools:showAsAction="ifRoom" />
+
+</menu>

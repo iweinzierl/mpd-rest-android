@@ -26,4 +26,5 @@
     <string name="player_notification_volume_change_failed">Unable to change player volume</string>
 
     <string name="menu_popup_add_and_replace">Playlist: Add and Replace</string>
+    <string name="menu_activity_artists_sync_library">Sync Library</string>
 </resources>
